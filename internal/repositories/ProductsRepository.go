@@ -20,3 +20,14 @@ func (repo *ProductRepository) CreateProduct(product *entities.Product) (*entiti
 	}
 	return product, nil
 }
+
+func (repo *ProductRepository) GetAllProducts() ([]*entities.Product, error) {
+	var products []*entities.Product
+
+	result := repo.db.Find(&products)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+
+	return products, nil
+}

@@ -6,7 +6,6 @@ import (
 	"gorm.io/gorm"
 )
 
-// Product representa um produto no banco de dados
 type Product struct {
 	gorm.Model
 	Name        string     `gorm:"type:varchar(100);not null" json:"name"`

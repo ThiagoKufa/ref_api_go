@@ -6,6 +6,7 @@ import (
 
 type ProductRepository interface {
 	CreateProduct(product *entities.Product) (*entities.Product, error)
+	GetAllProducts() ([]*entities.Product, error)
 }
 
 type ProductService struct {
@@ -18,4 +19,8 @@ func NewProductService(repo ProductRepository) *ProductService {
 
 func (s *ProductService) CreateProduct(product *entities.Product) (*entities.Product, error) {
 	return s.repo.CreateProduct(product)
+}
+func (s *ProductService) GetALlProduct() ([]*entities.Product, error) {
+	return s.repo.GetAllProducts()
+
 }

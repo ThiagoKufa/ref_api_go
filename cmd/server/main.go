@@ -22,9 +22,11 @@ func main() {
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("ok"))
 	})
+
 	r.Route("/products", func(r chi.Router) {
-		r.Post("/", productController.CreateProduct) // POST /products
-		// Adicione outras rotas conforme necessário
+		r.Post("/", productController.CreateProduct)
+		r.Get("/", productController.GetAllProduct)
+
 	})
 
 	http.ListenAndServe(":3000", r)

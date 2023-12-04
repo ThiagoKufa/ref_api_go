@@ -35,3 +35,14 @@ func (c *ProductController) CreateProduct(w http.ResponseWriter, r *http.Request
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(createdProduct)
 }
+
+func (c *ProductController) GetAllProduct(w http.ResponseWriter, r *http.Request) {
+
+	products, err := c.service.GetALlProduct()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(products)
+}
