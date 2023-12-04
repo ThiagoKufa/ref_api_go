@@ -1,3 +1,5 @@
+# **Documentação de Referência para API-Rest em Go: CRUD e WebSocket**
+
 ## **Visão Geral**
 
 Este projeto foi desenvolvido para servir como uma referência abrangente para a implementação de uma API WEB. Ele inclui a elaboração de um sistema CRUD (Create, Read, Update, Delete) e a integração de uma conexão WebSocket. As tecnologias utilizadas neste projeto são:
@@ -14,10 +16,10 @@ Este projeto foi desenvolvido para servir como uma referência abrangente para a
     - [x]  repository
     - [x]  service
     - [x]  controller
-- [ ]  **Buscar Todos os Produtos**: Método GET no endpoint **`/product`**.
-    - [ ]  repository
-    - [ ]  service
-    - [ ]  controller
+- [x]  **Buscar Todos os Produtos**: Método GET no endpoint **`/product`**.
+    - [x]  repository
+    - [x]  service
+    - [x]  controller
 - [ ]  **Buscar Produto por ID**: Método GET no endpoint **`/product/{ID}`**.
     - [ ]  repository
     - [ ]  service
