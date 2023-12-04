@@ -9,21 +9,49 @@ import (
 	"gorm.io/gorm"
 )
 
-// ConectDatabase inicializa e retorna a conexão com o banco de dados
-func ConectDatabase() *gorm.DB {
+// DBInstance é uma instância global do banco de dados
+var DBInstance *gorm.DB
+
+// InitDatabase inicializa a conexão com o banco de dados
+func ConectDatabase() {
 	config, err := configs.LoadConfig(".")
 	if err != nil {
-		log.Fatalf("Erro ao carregar as configurações: %v", err)
+		panic(fmt.Sprintf("Erro ao carregar as configurações: %v", err))
 	}
 
 	dns := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s",
 		config.DBHost, config.DBPort, config.DBUser, config.DBName, config.DBPassword)
 
-	db, err := gorm.Open(postgres.Open(dns), &gorm.Config{})
+	fmt.Println(dns)
+	DBInstance, err = gorm.Open(postgres.Open(dns), &gorm.Config{})
 	if err != nil {
-		log.Fatalf("Falha ao conectar com o banco de dados: %v", err)
+		panic(fmt.Sprintf("Falha ao conectar com o banco de dados: %v", err))
 	}
 
 	fmt.Println("Conexão com o banco de dados estabelecida")
-	return db
+
+}
+
+func CloseDatabaseConnection() {
+	db, err := DBInstance.DB()
+	if err != nil {
+		log.Fatalf("Erro ao fechar a conexão com o banco de dados: %v", err)
+	}
+	err = db.Close()
+	if err != nil {
+		log.Fatalf("Erro ao fechar a conexão com o banco de dados: %v", err)
+	}
+	log.Println("Conexão com o banco de dados fechada com sucesso")
+}
+
+func Migrate(models ...interface{}) {
+	// Realiza a migração para cada modelo passado
+	for _, model := range models {
+		err := DBInstance.AutoMigrate(model)
+		if err != nil {
+			panic(fmt.Sprintf("Falha na migração do modelo [%v]: %v", model, err))
+		}
+	}
+
+	fmt.Println("Migração do banco de dados concluída")
 }
