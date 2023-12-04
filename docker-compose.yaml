@@ -5,11 +5,10 @@ services:
     image: postgres:latest
     restart: always
     environment:
-      POSTGRES_DB: api_go          # Nome do banco de dados
-      POSTGRES_USER: root          # Usuário do banco de dados
-      POSTGRES_PASSWORD: root      # Senha do banco de dados
+      POSTGRES_DB: api_go # Nome do banco de dados
+      POSTGRES_USER: root # Usuário do banco de dados
+      POSTGRES_PASSWORD: root # Senha do banco de dados
     volumes:
-      - ./data/db:/var/lib/postgresql/data  # Persistência dos dados
+      - ./data/db:/var/lib/postgresql/data # Persistência dos dados
     ports:
-      - "5432:5432"  # Porta padrão do PostgreSQL
-
+      - "5432:5432" # Porta padrão do PostgreSQL
